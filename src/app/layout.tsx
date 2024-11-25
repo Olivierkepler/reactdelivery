@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import  Footer from "./components/Footer"
 import  Navbar from "./components/Navbar"
+import Hero from "./components/Hero";
 
 
 export const metadata: Metadata = {
@@ -23,7 +24,9 @@ export default function RootLayout({
       
       <body>
         <Navbar />
+<Hero/>
         <main className="container mx-auto p-4">{children}</main>
+  
         <Footer />
       </body>
     </html>
