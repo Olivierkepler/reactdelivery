@@ -25,7 +25,9 @@ export default function RootLayout({
       <body>
         <Navbar />
 <Hero/>
-        <main className="container mx-auto ">{children}</main>
+        {/* <main className="container mx-auto ">{children}</main> */}
+        <main className="w-full ">{children}</main>
+
   
         <Footer />
       </body>

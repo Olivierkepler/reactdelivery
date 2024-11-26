@@ -9,7 +9,7 @@ const Services = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Service Card - Same Day Delivery */}
           <div className="bg-white p-8 rounded-xl shadow-xl transform transition duration-500 hover:scale-105 hover:shadow-2xl">
-            <h3 className="text-3xl font-semibold text-blue-600 mb-6">Same Day Delivery</h3>
+            <h3 className="text-3xl  font-semibold text-blue-600 mb-6">Same Day Delivery</h3>
             <p className="text-lg text-gray-700">
               Enjoy the convenience of having your items delivered on the same day, ensuring urgent deliveries are never a problem.
             </p>
@@ -20,7 +20,7 @@ const Services = () => {
 
           {/* Service Card - Scheduled Delivery */}
           <div className="bg-white p-8 rounded-xl shadow-xl transform transition duration-500 hover:scale-105 hover:shadow-2xl">
-            <h3 className="text-3xl font-semibold text-blue-600 mb-6">Scheduled Delivery</h3>
+            <h3 className="text-3xl  font-semibold text-blue-600 mb-6">Scheduled Delivery</h3>
             <p className="text-lg text-gray-700">
               Schedule your deliveries to fit your needs, whether it’s for the next day, week, or at a specific time.
             </p>
@@ -31,7 +31,7 @@ const Services = () => {
 
           {/* Service Card - International Shipping */}
           <div className="bg-white p-8 rounded-xl shadow-xl transform transition duration-500 hover:scale-105 hover:shadow-2xl">
-            <h3 className="text-3xl font-semibold text-blue-600 mb-6">International Shipping</h3>
+            <h3 className="text-3xl  font-semibold text-blue-600 mb-6">International Shipping</h3>
             <p className="text-lg text-gray-700">
               We provide reliable international delivery services, ensuring your shipments reach their global destinations securely.
             </p>
