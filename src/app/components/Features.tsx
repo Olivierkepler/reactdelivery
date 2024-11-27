@@ -60,6 +60,24 @@ const Features = () => {
                             Get your packages delivered quickly and efficiently.
                         </p>
                     </div>
+                    {/* <div className="p-6 bg-white shadow-md rounded-md text-center hover:bg-blue-50 transition-colors duration-300">
+                        <div className="mb-4">
+                            <svg
+                                className="w-12 h-12 text-blue-600 mx-auto"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                            >
+                                <path d="M12 22C10.8954 22 10 21.1046 10 20C10 18.8954 10.8954 18 12 18C13.1046 18 14 18.8954 14 20C14 21.1046 13.1046 22 12 22ZM12 2C10.8954 2 10 2.89543 10 4V14C10 15.1046 10.8954 16 12 16C13.1046 16 14 15.1046 14 14V4C14 2.89543 13.1046 2 12 2Z" />
+                            </svg>
+                        </div>
+                        <h3 className="text-2xl font-bold mb-2 text-gray-800">
+                            Customer Support
+                        </h3>
+                        <p className="text-gray-600">
+                            Our team is here to assist you 24/7 for any delivery needs.
+                        </p>
+                    </div> */}
                 </div>
             </div>
         </section>
