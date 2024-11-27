@@ -35,5 +35,9 @@ body {
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, and Opera */
 }
+/* Optional Custom Easing for Slide Animation */
+.transition-max-height {
+  transition: max-height 0.3s ease-in-out;
+}
 
 

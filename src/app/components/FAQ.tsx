@@ -1,5 +1,7 @@
 'use client';
 
+import React from 'react';
+
 const FAQ = () => {
     const handleSearch = () => {
         const searchQuery = (
@@ -31,11 +33,11 @@ const FAQ = () => {
         { question: 'How can I track my delivery?', answer: '...' },
         { question: 'What are your delivery charges?', answer: '...' },
         { question: 'What should I do if my package is delayed?', answer: '...' },
+        { question: 'How can I track my delivery?', answer: '...' },
+        { question: 'What are your delivery charges?', answer: '...' },
+        { question: 'What should I do if my package is delayed?', answer: '...' },
+        
         { question: 'Can I change the delivery address?', answer: '...' },
-        { question: 'Can I change the delivery address?', answer: '...' },
-        { question: 'Can I change the delivery address?', answer: '...' },
-        { question: 'Can I change the delivery address?', answer: '...' },
-        // Add more questions as needed
     ];
 
     return (
@@ -82,7 +84,7 @@ const FAQ = () => {
                                     />
                                 </svg>
                             </summary>
-                            <div className="faq-answer px-6 py-4 text-gray-600 leading-relaxed">
+                            <div className="faq-answer overflow-hidden transition-max-height duration-300 max-h-0 group-open:max-h-screen px-6 py-4 text-gray-600 leading-relaxed">
                                 {faq.answer}
                             </div>
                         </details>
