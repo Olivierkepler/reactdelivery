@@ -19,3 +19,12 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+/* This will make the accordion work with pure CSS */
+[data-accordion-target]:checked + [data-accordion-content] {
+  display: block;
+}
+[data-accordion-content] {
+  display: none;
+}
+
+
