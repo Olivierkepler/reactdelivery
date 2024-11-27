@@ -5,7 +5,7 @@ const Testimonials = () => {
             text: "The delivery was seamless, and the customer support was exceptional. Highly recommended!",
             name: "Jane Doe",
             title: "Business Owner",
-            image: "https://via.placeholder.com/100",
+            image: "man1.jpg",
             rating: 5,
         },
         {
@@ -13,7 +13,7 @@ const Testimonials = () => {
             text: "Amazing service! My fragile items arrived intact and on time. I’ll definitely use ReactDelivery again.",
             name: "John Smith",
             title: "Freelancer",
-            image: "https://via.placeholder.com/100",
+            image: "women.jpg",
             rating: 4,
         },
         {
@@ -21,7 +21,7 @@ const Testimonials = () => {
             text: "From start to finish, everything was perfect. Great communication and quick delivery!",
             name: "Emma Brown",
             title: "E-commerce Seller",
-            image: "https://via.placeholder.com/100",
+            image: "woman1.jpeg",
             rating: 5,
         },
     ];
