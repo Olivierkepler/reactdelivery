@@ -1,19 +1,31 @@
-const Testimonials = () => {
-    const testimonials = [
+import React from 'react';
+import Image from 'next/image';
+
+interface Testimonial {
+    id: number;
+    text: string;
+    name: string;
+    title: string;
+    image: string;
+    rating: number;
+}
+
+const Testimonials: React.FC = () => {
+    const testimonials: Testimonial[] = [
         {
             id: 1,
             text: "The delivery was seamless, and the customer support was exceptional. Highly recommended!",
             name: "Jane Doe",
             title: "Business Owner",
-            image: "man1.jpg",
+            image: "/images/man1.jpg",
             rating: 5,
         },
         {
             id: 2,
-            text: "Amazing service! My fragile items arrived intact and on time. I’ll definitely use ReactDelivery again.",
+            text: "Amazing service! My fragile items arrived intact and on time. I'll definitely use ReactDelivery again.",
             name: "John Smith",
             title: "Freelancer",
-            image: "women.jpg",
+            image: "/images/women.jpg",
             rating: 4,
         },
         {
@@ -21,12 +33,12 @@ const Testimonials = () => {
             text: "From start to finish, everything was perfect. Great communication and quick delivery!",
             name: "Emma Brown",
             title: "E-commerce Seller",
-            image: "woman1.jpeg",
+            image: "/images/woman1.jpeg",
             rating: 5,
         },
     ];
 
-    const renderStars = (rating: number) => {
+    const renderStars = (rating: number): JSX.Element[] => {
         const stars = [];
         for (let i = 0; i < 5; i++) {
             stars.push(
@@ -38,6 +50,7 @@ const Testimonials = () => {
                     }`}
                     fill="currentColor"
                     viewBox="0 0 20 20"
+                    aria-hidden="true"
                 >
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.4 4.304a1 1 0 00.95.69h4.517c.969 0 1.371 1.24.588 1.81l-3.646 2.65a1 1 0 00-.364 1.118l1.4 4.304c.3.921-.755 1.688-1.539 1.118l-3.646-2.65a1 1 0 00-1.175 0l-3.646 2.65c-.784.57-1.838-.197-1.539-1.118l1.4-4.304a1 1 0 00-.364-1.118L2.06 9.731c-.783-.57-.38-1.81.588-1.81h4.517a1 1 0 00.95-.69l1.4-4.304z" />
                 </svg>
@@ -62,8 +75,10 @@ const Testimonials = () => {
                                 {testimonial.text}
                             </p>
                             <div className="mt-6 flex items-center">
-                                <img
-                                    className="w-14 h-14 rounded-full border-2 border-blue-600"
+                                <Image
+                                    width={56}
+                                    height={56}
+                                    className="rounded-full border-2 border-blue-600"
                                     src={testimonial.image}
                                     alt={testimonial.name}
                                 />
@@ -76,7 +91,9 @@ const Testimonials = () => {
                                     </span>
                                 </div>
                             </div>
-                            <div className="mt-4 flex">{renderStars(testimonial.rating)}</div>
+                            <div className="mt-4 flex">
+                                {renderStars(testimonial.rating)}
+                            </div>
                         </div>
                     ))}
                 </div>

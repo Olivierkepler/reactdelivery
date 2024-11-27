@@ -1,48 +1,42 @@
 'use client';
 
+import React, { useState } from 'react';
+
 const DeliveryForm = () => {
-    let estimatedCost = 0;
+    const [formData, setFormData] = useState({
+        senderName: '',
+        senderAddress: '',
+        senderContact: '',
+        recipientName: '',
+        recipientAddress: '',
+        recipientContact: '',
+        packageWeight: '',
+        deliveryOption: 'standard',
+        deliveryDate: '',
+    });
 
-    const handleFormChange = () => {
-        const packageWeightInput = document.getElementById(
-            'packageWeight'
-        ) as HTMLInputElement;
-        const deliveryOptionInput = document.getElementById(
-            'deliveryOption'
-        ) as HTMLSelectElement;
+    const [estimatedCost, setEstimatedCost] = useState(0);
 
-        const weight = parseFloat(packageWeightInput?.value) || 0;
-        const deliveryOption = deliveryOptionInput?.value;
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
 
-        // Calculate cost
-        let cost = weight * 5; // Base cost per kg
-        if (deliveryOption === 'express') cost += 10;
-        if (deliveryOption === 'sameDay') cost += 20;
-
-        // Update estimated cost dynamically
-        const costDisplay = document.getElementById('costDisplay') as HTMLElement;
-        costDisplay.textContent = `$${cost.toFixed(2)}`;
-        estimatedCost = cost;
+        if (name === 'packageWeight' || name === 'deliveryOption') {
+            calculateCost(value, formData.deliveryOption);
+        }
     };
 
-    const handleSubmit = (event: React.FormEvent) => {
-        event.preventDefault();
+    const calculateCost = (weight: string, option: string) => {
+        const weightValue = parseFloat(weight) || 0;
+        let cost = weightValue * 5; // Base cost per kg
+        if (option === 'express') cost += 10;
+        if (option === 'sameDay') cost += 20;
+        setEstimatedCost(cost);
+    };
 
-        const formData = new FormData(event.target as HTMLFormElement);
-
-        const payload = {
-            senderName: formData.get('senderName'),
-            senderAddress: formData.get('senderAddress'),
-            senderContact: formData.get('senderContact'),
-            recipientName: formData.get('recipientName'),
-            recipientAddress: formData.get('recipientAddress'),
-            recipientContact: formData.get('recipientContact'),
-            packageWeight: formData.get('packageWeight'),
-            deliveryOption: formData.get('deliveryOption'),
-            deliveryDate: formData.get('deliveryDate'),
-        };
-
-        console.log('Delivery Request Submitted:', payload);
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        console.log('Delivery Request Submitted:', formData);
         alert('Your delivery request has been submitted!');
     };
 
@@ -54,7 +48,6 @@ const DeliveryForm = () => {
                 </h2>
                 <form
                     onSubmit={handleSubmit}
-                    onChange={handleFormChange}
                     className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-lg"
                 >
                     {/* Sender Details */}
@@ -64,6 +57,8 @@ const DeliveryForm = () => {
                             type="text"
                             name="senderName"
                             placeholder="Sender Name"
+                            value={formData.senderName}
+                            onChange={handleChange}
                             className="w-full border border-gray-300 rounded-lg px-4 py-2"
                             required
                         />
@@ -73,6 +68,8 @@ const DeliveryForm = () => {
                             type="text"
                             name="senderAddress"
                             placeholder="Sender Address"
+                            value={formData.senderAddress}
+                            onChange={handleChange}
                             className="w-full border border-gray-300 rounded-lg px-4 py-2"
                             required
                         />
@@ -82,6 +79,8 @@ const DeliveryForm = () => {
                             type="text"
                             name="senderContact"
                             placeholder="Sender Contact"
+                            value={formData.senderContact}
+                            onChange={handleChange}
                             className="w-full border border-gray-300 rounded-lg px-4 py-2"
                             required
                         />
@@ -94,6 +93,8 @@ const DeliveryForm = () => {
                             type="text"
                             name="recipientName"
                             placeholder="Recipient Name"
+                            value={formData.recipientName}
+                            onChange={handleChange}
                             className="w-full border border-gray-300 rounded-lg px-4 py-2"
                             required
                         />
@@ -103,6 +104,8 @@ const DeliveryForm = () => {
                             type="text"
                             name="recipientAddress"
                             placeholder="Recipient Address"
+                            value={formData.recipientAddress}
+                            onChange={handleChange}
                             className="w-full border border-gray-300 rounded-lg px-4 py-2"
                             required
                         />
@@ -112,6 +115,8 @@ const DeliveryForm = () => {
                             type="text"
                             name="recipientContact"
                             placeholder="Recipient Contact"
+                            value={formData.recipientContact}
+                            onChange={handleChange}
                             className="w-full border border-gray-300 rounded-lg px-4 py-2"
                             required
                         />
@@ -123,17 +128,44 @@ const DeliveryForm = () => {
                         <input
                             type="number"
                             name="packageWeight"
-                            id="packageWeight"
                             placeholder="Weight (kg)"
+                            value={formData.packageWeight}
+                            onChange={handleChange}
                             className="w-full border border-gray-300 rounded-lg px-4 py-2"
                             required
                         />
                     </div>
                     <div className="mb-4">
+                    <label htmlFor="deliveryOption" className="block text-sm font-medium text-gray-700">Delivery Option</label>
+                       
+
+
+
+                        <label htmlFor="deliveryOption" className="block text-sm font-medium text-gray-700">Delivery Option</label>
                         <select
                             name="deliveryOption"
                             id="deliveryOption"
+                            onChange={handleChange}
+                            defaultValue="standard"
                             className="w-full border border-gray-300 rounded-lg px-4 py-2"
+                            required
+                        >
+                            <option value="standard">Standard Delivery</option>
+                            <option value="express">Express Delivery</option>
+                            <option value="sameDay">Same-Day Delivery</option>
+                        </select>
+
+
+
+
+                        <label htmlFor="deliveryOption" className="block text-sm font-medium text-gray-700">Delivery Option</label>
+                        <select
+                            name="deliveryOption"
+                            onChange={handleChange}
+                            id="deliveryOption"
+                            defaultValue="standard"
+                            className="w-full border border-gray-300 rounded-lg px-4 py-2"
+                            required
                         >
                             <option value="standard">Standard Delivery</option>
                             <option value="express">Express Delivery</option>
@@ -141,9 +173,12 @@ const DeliveryForm = () => {
                         </select>
                     </div>
                     <div className="mb-4">
+                        <label htmlFor="deliveryDate" className="block text-sm font-medium text-gray-700">Delivery Date</label>
                         <input
                             type="date"
                             name="deliveryDate"
+                            id="deliveryDate"
+                            placeholder="Select Delivery Date"
                             className="w-full border border-gray-300 rounded-lg px-4 py-2"
                             required
                         />
@@ -152,7 +187,7 @@ const DeliveryForm = () => {
                     {/* Cost Estimation */}
                     <div className="mb-6">
                         <p className="text-lg font-medium text-gray-700">
-                            Estimated Cost: <span id="costDisplay">$0.00</span>
+                            Estimated Cost: <span className="text-blue-600">${estimatedCost}</span>
                         </p>
                     </div>
 
