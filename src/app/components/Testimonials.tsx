@@ -17,7 +17,7 @@ const Testimonials: React.FC = () => {
             text: "The delivery was seamless, and the customer support was exceptional. Highly recommended!",
             name: "Jane Doe",
             title: "Business Owner",
-            image: "/images/man1.jpg",
+            image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
             rating: 5,
         },
         {
@@ -25,7 +25,7 @@ const Testimonials: React.FC = () => {
             text: "Amazing service! My fragile items arrived intact and on time. I'll definitely use ReactDelivery again.",
             name: "John Smith",
             title: "Freelancer",
-            image: "/images/women.jpg",
+            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
             rating: 4,
         },
         {
@@ -33,10 +33,11 @@ const Testimonials: React.FC = () => {
             text: "From start to finish, everything was perfect. Great communication and quick delivery!",
             name: "Emma Brown",
             title: "E-commerce Seller",
-            image: "/images/woman1.jpeg",
+            image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80",
             rating: 5,
         },
     ];
+    
 
     const renderStars = (rating: number): JSX.Element[] => {
         const stars = [];
@@ -75,13 +76,14 @@ const Testimonials: React.FC = () => {
                                 {testimonial.text}
                             </p>
                             <div className="mt-6 flex items-center">
-                                <Image
-                                    width={56}
-                                    height={56}
-                                    className="rounded-full border-2 border-blue-600"
-                                    src={testimonial.image}
-                                    alt={testimonial.name}
-                                />
+                                <div className="relative w-14 h-14">
+                                    <Image
+                                        fill
+                                        className="rounded-full border-2 border-blue-600 object-cover"
+                                        src={testimonial.image}
+                                        alt={testimonial.name}
+                                    />
+                                </div>
                                 <div className="ml-4">
                                     <h3 className="text-xl font-bold text-gray-800">
                                         {testimonial.name}
