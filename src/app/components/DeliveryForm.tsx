@@ -19,19 +19,27 @@ const DeliveryForm = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
+
+        // Update form data state
         setFormData({ ...formData, [name]: value });
 
+        // Recalculate the cost when package weight or delivery option changes
         if (name === 'packageWeight' || name === 'deliveryOption') {
-            calculateCost(value, formData.deliveryOption);
+            const updatedWeight = name === 'packageWeight' ? value : formData.packageWeight;
+            const updatedOption = name === 'deliveryOption' ? value : formData.deliveryOption;
+            calculateCost(updatedWeight, updatedOption);
         }
     };
 
     const calculateCost = (weight: string, option: string) => {
-        const weightValue = parseFloat(weight) || 0;
-        let cost = weightValue * 5; // Base cost per kg
-        if (option === 'express') cost += 10;
-        if (option === 'sameDay') cost += 20;
-        setEstimatedCost(cost);
+        const weightValue = parseFloat(weight) || 0; // Convert weight to a number, default to 0 if invalid
+        let cost = weightValue * 5; // Base cost: $5 per kg
+
+        // Add additional costs based on the delivery option
+        if (option === 'express') cost += 10; // Express: $10 extra
+        if (option === 'sameDay') cost += 20; // Same-Day: $20 extra
+
+        setEstimatedCost(cost); // Update estimated cost
     };
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -136,34 +144,14 @@ const DeliveryForm = () => {
                         />
                     </div>
                     <div className="mb-4">
-                    <label htmlFor="deliveryOption" className="block text-sm font-medium text-gray-700">Delivery Option</label>
-                       
-
-
-
-                        <label htmlFor="deliveryOption" className="block text-sm font-medium text-gray-700">Delivery Option</label>
-                        <select
-                            name="deliveryOption"
-                            id="deliveryOption"
-                            onChange={handleChange}
-                            defaultValue="standard"
-                            className="w-full border border-gray-300 rounded-lg px-4 py-2"
-                            required
-                        >
-                            <option value="standard">Standard Delivery</option>
-                            <option value="express">Express Delivery</option>
-                            <option value="sameDay">Same-Day Delivery</option>
-                        </select>
-
-
-
-
-                        <label htmlFor="deliveryOption" className="block text-sm font-medium text-gray-700">Delivery Option</label>
+                        <label htmlFor="deliveryOption" className="block text-sm font-medium text-gray-700">
+                            Delivery Option
+                        </label>
                         <select
                             name="deliveryOption"
                             onChange={handleChange}
                             id="deliveryOption"
-                            defaultValue="standard"
+                            value={formData.deliveryOption}
                             className="w-full border border-gray-300 rounded-lg px-4 py-2"
                             required
                         >
@@ -173,12 +161,15 @@ const DeliveryForm = () => {
                         </select>
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="deliveryDate" className="block text-sm font-medium text-gray-700">Delivery Date</label>
+                        <label htmlFor="deliveryDate" className="block text-sm font-medium text-gray-700">
+                            Delivery Date
+                        </label>
                         <input
                             type="date"
                             name="deliveryDate"
                             id="deliveryDate"
-                            placeholder="Select Delivery Date"
+                            value={formData.deliveryDate}
+                            onChange={handleChange}
                             className="w-full border border-gray-300 rounded-lg px-4 py-2"
                             required
                         />
