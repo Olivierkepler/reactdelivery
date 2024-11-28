@@ -4,6 +4,8 @@ import { deliveries } from '@/store/deliveryStore';
 export async function POST(request: Request) {
     try {
         const body = await request.json();
+
+        // Destructure the request body
         const {
             senderName,
             senderAddress,
@@ -34,7 +36,7 @@ export async function POST(request: Request) {
             );
         }
 
-        // Add new delivery to the store
+        // Add the new delivery to the store
         const newDelivery = {
             id: deliveries.length + 1,
             senderName,
@@ -43,16 +45,16 @@ export async function POST(request: Request) {
             recipientName,
             recipientAddress,
             recipientContact,
-            packageWeight,
+            packageWeight: parseFloat(packageWeight).toString(), // Convert weight to string
             deliveryOption,
             deliveryDate,
-            createdAt: new Date(),
+            createdAt: new Date().toISOString(), // Store as ISO format
         };
 
-        deliveries.push(newDelivery);
+        deliveries.push({ ...newDelivery, createdAt: new Date(newDelivery.createdAt) });
 
         return NextResponse.json(
-            { message: 'Delivery scheduled successfully', delivery: newDelivery },
+            { message: 'Delivery scheduled successfully.', delivery: newDelivery },
             { status: 201 }
         );
     } catch (error) {
@@ -65,5 +67,14 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
-    return NextResponse.json({ deliveries }, { status: 200 });
+    try {
+        // Return the deliveries array as the response
+        return NextResponse.json({ deliveries }, { status: 200 });
+    } catch (error) {
+        console.error('Error handling GET request:', error);
+        return NextResponse.json(
+            { error: 'Failed to retrieve deliveries. Please try again.' },
+            { status: 500 }
+        );
+    }
 }
