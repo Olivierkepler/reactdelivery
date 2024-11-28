@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 
 const DeliveryForm = () => {
@@ -42,11 +41,46 @@ const DeliveryForm = () => {
         setEstimatedCost(cost); // Update estimated cost
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Delivery Request Submitted:', formData);
-        alert('Your delivery request has been submitted!');
+
+        try {
+            const response = await fetch('/api/deliveries', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                alert('Delivery scheduled successfully!');
+                console.log('Response:', result);
+
+                // Reset the form data after successful submission
+                setFormData({
+                    senderName: '',
+                    senderAddress: '',
+                    senderContact: '',
+                    recipientName: '',
+                    recipientAddress: '',
+                    recipientContact: '',
+                    packageWeight: '',
+                    deliveryOption: 'standard',
+                    deliveryDate: '',
+                });
+                setEstimatedCost(0);
+            } else {
+                const errorData = await response.json();
+                alert(`Error: ${errorData.error}`);
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            alert('Failed to schedule delivery. Please try again.');
+        }
     };
+
 
     return (
         <section className="bg-gray-50 py-16">
