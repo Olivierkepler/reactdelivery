@@ -7,7 +7,7 @@ const nextConfig = {
         hostname: '**',
       },
     ],
-    domains: ['images.unsplash.com', 'your-other-domain.com'],
+    domains: ['images.unsplash.com'],
   },
 }
 

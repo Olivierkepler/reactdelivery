@@ -1,11 +1,3 @@
-// import DeliveriesList from '@/app/components/DeliveriesList';
-
-// const DeliveriesPage = () => {
-//     return (
-//         <main>
-//             <DeliveriesList />
-//         </main>
-//     );
-// };
-
-// export default DeliveriesPage;
+export default function DeliveriesApiPage() {
+    return null; // API routes don't need to render anything
+}

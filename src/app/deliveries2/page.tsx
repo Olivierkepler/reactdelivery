@@ -6,4 +6,5 @@ export default function DeliveriesPage() {
             <DeliveriesList />
         </main>
     );
-} 
+}
+// 
